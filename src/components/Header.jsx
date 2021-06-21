@@ -13,7 +13,7 @@ const Header = () => {
         <ul className="d-flex align-center">
           <li className="mr-30">
             <img className="mr-30" width={18} height={18} src="/img/cart.svg" />
-            <span>1205 ru.</span>
+            <span>1205 руб.</span>
           </li>
           <li>
             <img width={18} height={18} src="/img/user.svg" />
