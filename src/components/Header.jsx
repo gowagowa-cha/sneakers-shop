@@ -1,10 +1,13 @@
 import React from 'react';
 
+// import logo from '/public//img/logo'
+
 const Header = () => {
 	return (
 		<header className="d-flex justify-between align-center p-40">
         <div className="d-flex align-center">
           <img className="mr-10" src="/img/logo.png" />
+          {/* <img className="mr-10" src=${logo} /> */}
           <div>
             <h3 className="text-uppercase"> sneakers shop</h3>
             <p className="opacity-5">Магазин лучших кроссовок</p>
