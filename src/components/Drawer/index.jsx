@@ -1,26 +1,28 @@
 import React from 'react';
 
+import s from './Drawer.module.scss'
+
 const Overlay = () => {
 	return (
-		<div className="overlay"  style={{ display: 'none'}}>
-        <div className="drawer">
+		<div className={s.overlay}  style={{ display: 'none'}}>
+        <div className={s.drawer}>
           <h2 className="mb-40 d-flex justify-between">
             Корзина
             <img
-              className="remove__btn cu-p"
+              className={s.remove__btn}
               width={40}
               height={40}
               src="/img/exit.png"
               alt="exit"
             />
           </h2>
-          <div className="items">
-            <div className="cart__item d-flex align-center">
+          <div className={s.items}>
+            <div className={s.cart__item}>
               <img
                 className="mr-20"
                 width={70}
                 height={70}
-                src="/img/sneakers/3.jpg"
+                src="/img/sneakers/4.jpg"
                 alt="snearers"
               />
               <div className="mr-15">
@@ -28,14 +30,16 @@ const Overlay = () => {
                 <b>12 999 ru. </b>
               </div>
               <img
-                className="remove__btn cu-p"
+                className={s.remove__btn}
                 width={32}
                 height={32}
                 src="/img/exit.png"
                 alt="exit"
               />
             </div>
-            <div className="cart__item d-flex align-center">
+          </div>
+          <div className={s.items}>
+            <div className={s.cart__item}>
               <img
                 className="mr-20"
                 width={70}
@@ -44,31 +48,11 @@ const Overlay = () => {
                 alt="snearers"
               />
               <div className="mr-15">
-                <p className="mb-5">Мужские Кроссовки Nike Air Max 270</p>
-                <b>12 999 ru. </b>
+                <p className="mb-5">Кроссовки Puma X Aka Boku Future Rider</p>
+                <b>8 990 ru. </b>
               </div>
               <img
-                className="remove__btn cu-p"
-                width={32}
-                height={32}
-                src="/img/exit.png"
-                alt="exit"
-              />
-            </div>
-            <div className="cart__item d-flex align-center">
-              <img
-                className="mr-20"
-                width={70}
-                height={70}
-                src="/img/sneakers/3.jpg"
-                alt="snearers"
-              />
-              <div className="mr-15">
-                <p className="mb-5">Мужские Кроссовки Nike Air Max 270</p>
-                <b>12 999 ru. </b>
-              </div>
-              <img
-                className="remove__btn cu-p"
+                className={s.remove__btn}
                 width={32}
                 height={32}
                 src="/img/exit.png"
@@ -77,7 +61,7 @@ const Overlay = () => {
             </div>
           </div>
 
-          <ul className="cartTotalBlock mt-30">
+          <ul className={s.cartTotalBlock}>
             <li>
               <span>Итого: </span>
               <div></div>
@@ -88,7 +72,7 @@ const Overlay = () => {
               <div></div>
               <b>1074 руб. </b>
             </li>
-            <button className="greenButton">
+            <button className={s.greenButton}>
               Оформить заказ
               <img src="/img/arrow.svg" alt="arrow" />
             </button>
