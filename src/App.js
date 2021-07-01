@@ -1,25 +1,43 @@
+import React from 'react';
+
 import Header from './/components/Header';
 import Drawer from './/components/Drawer';
 import Card from './/components/Card';
 import Search from './/components/Search';
 
-const arr = [
-  { title: 'Мужские Кроссовки Nike Blazer Mid Suede', price: "12 990", imgUrl: '/img/sneakers/1.jpg' },
-  { title: 'Мужские Кроссовки Nike Air Max 270', price: "8 990", imgUrl: '/img/sneakers/2.jpg' },
-  { title: 'Кроссовки Puma X Aka Boku Future Rider', price: "9 990", imgUrl: '/img/sneakers/3.jpg' },
-  { title: 'Мужские Кроссовки Under Armour Curry 8', price: "15 990", imgUrl: '/img/sneakers/4.jpg' },
-];
-
 function App() {
+  const [items, setItems] = React.useState([]);
+  const [cartDrawer, setCartDrawer] = React.useState([]);
+  const [cartOpened, setCartOpened] = React.useState(false);
+
+  React.useEffect(() => {
+	  fetch('https://60d9e5885f7bf10017547852.mockapi.io/items').then((res) => {
+		  return res.json()
+	  }).then((json) => {
+		  setItems(json)
+	  })
+  }, [])
+
+  const onAddedCart = (obj) => {
+	setCartDrawer(prev => [...prev, obj])
+  }
+
   return (
     <div className="wrapper clear">
-      <Drawer />
-      <Header />
+      {cartOpened && <Drawer items={cartDrawer} onClose={() => setCartOpened(false)} />}
+      <Header onClickCart={() => setCartOpened(true)} />
       <div className="content p-40">
         <Search />
         <div className="d-flex flex-wrap">
-          {arr.map(({ title, price, imgUrl, index }) => (
-            <Card key={`${index}_${title}`} title={title} price={price} img={imgUrl} />
+          {items.map(({ title, price, imgUrl, id }) => (
+            <Card
+              key={id}
+              title={title}
+              price={price}
+              imgUrl={imgUrl}
+              onFavorite={() => console.log('Добавили в закладки')}
+              onPlus={(obj) => onAddedCart(obj)}
+            />
           ))}
         </div>
       </div>
