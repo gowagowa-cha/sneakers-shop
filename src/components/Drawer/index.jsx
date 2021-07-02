@@ -2,7 +2,7 @@ import React from 'react';
 
 import s from './Drawer.module.scss'
 
-const Drawer = ({ onClose, items}) => {
+const Drawer = ({ onClose, onRemove, items}) => {
 	return (
 		<div className={s.overlay}>
         <div className={s.drawer}>
@@ -33,6 +33,7 @@ const Drawer = ({ onClose, items}) => {
 								 	<b>{el.price} ru. </b>
 					  			</div>
 					  			<img
+								  onClick={() => onRemove(el.id)}
 									className={s.remove__btn}
 									width={32}
 									height={32}
