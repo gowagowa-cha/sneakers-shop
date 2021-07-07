@@ -6,8 +6,8 @@ header{
 }
 
 .cart {
+	cursor: pointer;
 	margin-right: 30px;
-	
 	.logo {
 		cursor: pointer;
 		margin-right: 30px;
@@ -18,9 +18,9 @@ header{
 	}
 }
 .user {
-	cursor: pointer;
 	transition: transform 0.3s ease-in-out;
 	&:hover {
 		transform: translateY(-5px);
 	}
 }
+
