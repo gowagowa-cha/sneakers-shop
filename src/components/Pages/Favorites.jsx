@@ -1,8 +1,11 @@
 import React from 'react';
 import Card from '../Card/index'
+import  AppContext  from '..//../context'
 
-const Favorites = ( {favorite, onAddToFavorite, onAddedCart} ) => {
-	
+const Favorites = () => {
+	//с помощью хука useContext получаем пропсы
+	const { favorite, onAddToFavorite } = React.useContext(AppContext)
+
 	return (
 		<div className="p-40">
 			<div className='mb-40 d-flex justify-between align-center'>
@@ -18,7 +21,6 @@ const Favorites = ( {favorite, onAddToFavorite, onAddedCart} ) => {
                 price={price}
                 imgUrl={imgUrl}
                 onFavorite={(obj) => onAddToFavorite(obj)}
-                onPlus={(obj) => onAddedCart(obj)}
 					 			favorited={true}
               />
             ))}

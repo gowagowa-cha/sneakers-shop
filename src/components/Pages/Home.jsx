@@ -5,13 +5,14 @@ import Search from '../Search';
 
 const Home = ({
 	searchInputValue,
-	cartDrawer,
+	favorite,
 	items,
 	setsearchInputValue,
 	onAddedCart,
 	onAddToFavorite,	 
 	isLoading
 }) => {
+
 	// функция renderItems проверяет если идёт загрузка(isLoading)то показываем 8 фейковых карточек, иначе показываем <Card />
 	const renderItems = () => {
 		const filtredItems = items.filter((item) => item.title.toLowerCase().includes(searchInputValue.toLowerCase()))
@@ -21,7 +22,7 @@ const Home = ({
 				{...item}
 				onFavorite={(obj) => onAddToFavorite(obj)}
 				onPlus={(obj) => onAddedCart(obj)}
-				added={cartDrawer.some(obj => Number(obj.id) === Number(id))}
+				favorited={favorite.some(obj => Number(obj.id) === Number(id))}
 				loading={isLoading}
 			/>
 		))
