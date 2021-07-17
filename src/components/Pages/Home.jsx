@@ -5,30 +5,37 @@ import Search from '../Search';
 
 const Home = ({
 	searchInputValue,
+	cartDrawer,
 	items,
 	setsearchInputValue,
 	onAddedCart,
-	onAddToFavorite
+	onAddToFavorite,	 
+	isLoading
 }) => {
+	// функция renderItems проверяет если идёт загрузка(isLoading)то показываем 8 фейковых карточек, иначе показываем <Card />
+	const renderItems = () => {
+		const filtredItems = items.filter((item) => item.title.toLowerCase().includes(searchInputValue.toLowerCase()))
+		return (isLoading ? [...Array(8)] : filtredItems).map((item, id ) => (
+			<Card
+				key={id}
+				{...item}
+				onFavorite={(obj) => onAddToFavorite(obj)}
+				onPlus={(obj) => onAddedCart(obj)}
+				added={cartDrawer.some(obj => Number(obj.id) === Number(id))}
+				loading={isLoading}
+			/>
+		))
+	}
+
 	return (
 		<div className="content p-40">
-        <Search searchInputValue={searchInputValue} setsearchInputValue={setsearchInputValue} />
-        <div className="d-flex flex-wrap">
-          {items
-            .filter((item) => item.title.toLowerCase().includes(searchInputValue.toLowerCase()))
-            .map(({ title, price, imgUrl, id }) => (
-              <Card
-                key={id}
-					 id={id}
-                title={title}
-                price={price}
-                imgUrl={imgUrl}
-                onFavorite={(obj) => onAddToFavorite(obj)}
-                onPlus={(obj) => onAddedCart(obj)}
-              />
-            ))}
-        </div>
-      </div>
+			<Search searchInputValue={searchInputValue} setsearchInputValue={setsearchInputValue} />
+			<div className="d-flex flex-wrap">
+
+					{renderItems()}
+					
+			</div>
+		</div>
 	);
 };
 
