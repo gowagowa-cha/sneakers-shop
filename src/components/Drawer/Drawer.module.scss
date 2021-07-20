@@ -97,6 +97,12 @@
 	cursor: pointer;
 	transition: background 0.1s ease-in-out;
 
+	&:disabled {
+		animation: button-loading 0.8s ease-in-out infinite;
+		background-color: #bebebe !important;
+		cursor: default;
+	}
+
 	&:hover {
 		background: lighten(#9DD558, 10%);
 	}
@@ -121,5 +127,17 @@
 		text-align: center;
 		opacity: 0.5;
 		line-height: 24px;
+	}
+}
+
+@keyframes button-loading {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.7;
+	}
+	100% {
+		opacity: 1;
 	}
 }

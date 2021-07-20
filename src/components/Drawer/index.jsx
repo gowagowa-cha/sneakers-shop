@@ -1,19 +1,47 @@
 import React from 'react';
 import Info from '..//Card/Info';
 import AppContext from '../../context';
+import axios from 'axios'
 
 import s from './Drawer.module.scss'
 
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 const Drawer = ({ onClose, onRemove, items}) => {
 	//вытаскиваем корзину из контекста
-	const { setCartDrawer } = React.useContext(AppContext)
+	const { cartDrawer, setCartDrawer } = React.useContext(AppContext);
+	//содаю стейт для получения айди заказ
+	const [isOrderId, setIsOrderId] = React.useState(null);
 	//создаем стейт для кнопки оформления заказ
-	const [isOrderComplete, setIsOrderComplete] = React.useState(false)
+	const [isOrderComplete, setIsOrderComplete] = React.useState(false);
+	//добавляю стейт загрузки
+	const [isLoading, setIsLoading] = React.useState(false);
 
 	//функция меняет стейт и очищает корзину
-	const onClickOrder = () => {
-		setIsOrderComplete(true)
-		setCartDrawer([])
+	const onClickOrder = async () => {
+		try {
+			setIsLoading(true);
+			//весь массив в котором есть корзина отправляем на сервер
+			const {data} = await axios.post('https://60d9e5885f7bf10017547852.mockapi.io/orders', {
+				items: cartDrawer,
+			});
+	
+			setIsOrderId(data.id);
+			setIsOrderComplete(true);
+			setCartDrawer([]);
+
+			//использую временный костыль так как в mock.api нет метода реплейс
+			for (let i = 0; i < cartDrawer.length; i++) {
+				const item = cartDrawer[i]
+				await axios.delete('https://60d9e5885f7bf10017547852.mockapi.io/cart/' + item.id)
+				//делаем тайм что бы мок апи не заблокировал из-за многочисленых запросов
+				await delay(1000);
+			}
+
+		} catch (error) {
+			alert('Ошибка оформления заказа :( !')
+		}
+		setIsLoading(false);
 	}
 
 	return (
@@ -64,14 +92,14 @@ const Drawer = ({ onClose, onRemove, items}) => {
               			<div></div>
               			<b>1074 руб. </b>
             		</li>
-            		<button onClick={onClickOrder} className={s.greenButton}>
+            		<button disabled={isLoading} onClick={onClickOrder} className={s.greenButton}>
               			Оформить заказ
               			<img className='ml-10' src="/img/arrow.svg" alt="arrow" />
             		</button>
          		</ul>
 				</React.Fragment> :
 				<Info title={isOrderComplete ? "Заказ оформлен" : "Корзина пуста"}
-							description={isOrderComplete ? "Ваш заказ #18 скоро будет передан курьерской доставке" : "Добавьте хотя бы одну пару кроссовок что бы сделать заказ"}
+							description={isOrderComplete ? `Ваш заказ #${isOrderId} скоро будет передан курьерской доставке` : "Добавьте хотя бы одну пару кроссовок что бы сделать заказ"}
 							image={isOrderComplete ? "/img/complete-order.jpg": "/img/empty.jpg"}/>
 			}
         </div>
