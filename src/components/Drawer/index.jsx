@@ -1,8 +1,21 @@
 import React from 'react';
+import Info from '..//Card/Info';
+import AppContext from '../../context';
 
 import s from './Drawer.module.scss'
 
 const Drawer = ({ onClose, onRemove, items}) => {
+	//вытаскиваем корзину из контекста
+	const { setCartDrawer } = React.useContext(AppContext)
+	//создаем стейт для кнопки оформления заказ
+	const [isOrderComplete, setIsOrderComplete] = React.useState(false)
+
+	//функция меняет стейт и очищает корзину
+	const onClickOrder = () => {
+		setIsOrderComplete(true)
+		setCartDrawer([])
+	}
+
 	return (
 		<div className={s.overlay}>
         <div className={s.drawer}>
@@ -51,21 +64,15 @@ const Drawer = ({ onClose, onRemove, items}) => {
               			<div></div>
               			<b>1074 руб. </b>
             		</li>
-            		<button className={s.greenButton}>
+            		<button onClick={onClickOrder} className={s.greenButton}>
               			Оформить заказ
               			<img className='ml-10' src="/img/arrow.svg" alt="arrow" />
             		</button>
          		</ul>
 				</React.Fragment> :
-				<div className={s.cartEmpty}>
-					<img className='mb-20' width={120} height={120} src="/img/empty.jpg" alt="empty" />
-					<h2 className='mb-10'>Корзина пуста</h2>
-					<p className='mb-40'>Добавьте хотя бы одну пару кроссовок что бы сделать заказ</p>
-					<button onClick={onClose} className={s.greenButton}>
-						<img className='mr-10' src="/img/prev-arrow.svg" alt="prev-arrow" />
-						Вернуться назад
-					</button>
-				</div>
+				<Info title={isOrderComplete ? "Заказ оформлен" : "Корзина пуста"}
+							description={isOrderComplete ? "Ваш заказ #18 скоро будет передан курьерской доставке" : "Добавьте хотя бы одну пару кроссовок что бы сделать заказ"}
+							image={isOrderComplete ? "/img/complete-order.jpg": "/img/empty.jpg"}/>
 			}
         </div>
       </div>

@@ -59,9 +59,9 @@ function App() {
   // функция добавляет и удаляет товар из избранного, делает проверку
   const onAddToFavorite = async (obj) => {
     try {
-      if (favorite.find((favObj) => favObj.id === obj.id)) {
+      if (favorite.find((favObj) => Number(favObj.id) === Number(obj.id))) {
         axios.delete(`https://60d9e5885f7bf10017547852.mockapi.io/favorites/${obj.id}`);
-        setFavorite((prev) => prev.filter((item) => item.id !== obj.id));
+        setFavorite((prev) => prev.filter((item) => Number(item.id) !== Number(obj.id)));
       } else {
         const { data } = await axios.post(
           'https://60d9e5885f7bf10017547852.mockapi.io/favorites',
@@ -79,7 +79,7 @@ function App() {
 	}
 
   return (
-    <AppContext.Provider value={{ items, favorite, cartDrawer, isItemAdded, onAddToFavorite }}>
+    <AppContext.Provider value={{ items, favorite, cartDrawer, isItemAdded, onAddToFavorite, setCartOpened, setCartDrawer }}>
       <div className="wrapper clear">
         {cartOpened && (
           <Drawer
