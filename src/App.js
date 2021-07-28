@@ -15,8 +15,8 @@ function App() {
   const [searchInputValue, setsearchInputValue] = React.useState(''); //контролируемый инпут
   const [cartOpened, setCartOpened] = React.useState(false); //стейт открытия и закрытия корзины
   const [isLoading, setIsLoading] = React.useState(true); // стейт загрузки карточек товаров
-
-  // для того чтобы прогружать кнопку фаворитс и added мы должны получить проверку с корзины и избранных, но useEffect работает синхронно
+ 
+	// для того чтобы прогружать кнопку фаворитс и added мы должны получить проверку с корзины и избранных, но useEffect работает синхронно
   // useEffect нельзя обернуть в async, надо сделать async функцию внутри
   React.useEffect(() => {
     //я делаю асиннхроную функцию для того что бы дождаться загрузки корзины и фаворитс и потом прогружаем айтемы

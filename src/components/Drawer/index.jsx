@@ -1,21 +1,25 @@
 import React from 'react';
 import Info from '..//Card/Info';
-import AppContext from '../../context';
 import axios from 'axios'
 
 import s from './Drawer.module.scss'
+import {useCart} from '../Hooks/useCart.js';
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const Drawer = ({ onClose, onRemove, items}) => {
-	//вытаскиваем корзину из контекста
-	const { cartDrawer, setCartDrawer } = React.useContext(AppContext);
+const Drawer = ({ onClose, onRemove, items = [] }) => {
+	//вытаскиваем корзину из кастомного хука 
+	const { cartDrawer, setCartDrawer, totalPrice } = useCart();
 	//содаю стейт для получения айди заказ
 	const [isOrderId, setIsOrderId] = React.useState(null);
 	//создаем стейт для кнопки оформления заказ
 	const [isOrderComplete, setIsOrderComplete] = React.useState(false);
 	//добавляю стейт загрузки
 	const [isLoading, setIsLoading] = React.useState(false);
+
+	//вытаскиваю из корзины цену и складываем в общую сумму
+	// const totalPrice = cartDrawer.reduce((sum, obj) => obj.price + sum, 0)
+	// перенес в кастомный хук
 
 	//функция меняет стейт и очищает корзину
 	const onClickOrder = async () => {
@@ -67,7 +71,7 @@ const Drawer = ({ onClose, onRemove, items}) => {
 								 	/>
 					  				<div className="mr-15">
 								 		<p className="mb-5">{el.title}</p>
-								 		<b>{el.price} ru. </b>
+								 		<b>{el.price} руб. </b>
 					  				</div>
 					  				<img
 								 		onClick={() => onRemove(el.id)}
@@ -85,12 +89,13 @@ const Drawer = ({ onClose, onRemove, items}) => {
             		<li>
               			<span>Итого: </span>
               			<div></div>
-              			<b>21 498 руб. </b>
+										{/* показываем общую сумму */}
+              			<b>{totalPrice} руб. </b>
             		</li>
             		<li>
               			<span>Налог 5%: </span>
               			<div></div>
-              			<b>1074 руб. </b>
+              			<b>{totalPrice/100*5} руб. </b>
             		</li>
             		<button disabled={isLoading} onClick={onClickOrder} className={s.greenButton}>
               			Оформить заказ
