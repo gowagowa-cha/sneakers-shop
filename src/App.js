@@ -6,6 +6,7 @@ import Drawer from './/components/Drawer';
 
 import Home from './/components/Pages/Home';
 import Favorites from './/components/Pages/Favorites';
+import Orders from './/components/Pages/Orders';
 import AppContext from './context'
 
 function App() {
@@ -79,7 +80,7 @@ function App() {
 	}
 
   return (
-    <AppContext.Provider value={{ items, favorite, cartDrawer, isItemAdded, onAddToFavorite, setCartOpened, setCartDrawer }}>
+    <AppContext.Provider value={{ items, favorite, cartDrawer, isItemAdded, onAddedCart, onAddToFavorite, setCartOpened, setCartDrawer }}>
       <div className="wrapper clear">
         {cartOpened && (
           <Drawer
@@ -106,6 +107,9 @@ function App() {
             // favorite={favorite}
             // onAddToFavorite={onAddToFavorite}
           />
+        </Route>
+        <Route path="/Orders" exact>
+          <Orders />
         </Route>
       </div>
     </AppContext.Provider>

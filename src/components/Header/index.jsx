@@ -24,12 +24,14 @@ const Header = ({ onClickCart }) => {
             <span>{totalPrice} руб.</span>
           </li>
           <li className={s.cart}>
-				 <Link to="/favorites">
-            	<img className={s.logo} width={18} height={18} src="/img/heart.svg" alt="heart"/>
-				 </Link>
+						<Link to="/favorites">
+							<img className={s.logo} width={18} height={18} src="/img/heart.svg" alt="heart"/>
+						</Link>
           </li>
           <li>
-            <img className={s.user} width={18} height={18} src="/img/user.svg" alt="user"/>
+						<Link to="/orders">
+            	<img className={s.user} width={18} height={18} src="/img/user.svg" alt="user"/>
+						</Link>
           </li>
         </ul>
       </header>

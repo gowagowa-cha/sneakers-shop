@@ -46,9 +46,9 @@ const Card = ({
         </ContentLoader>
       ) : (
         <>
-          <div className={styles.favorite} onClick={onClickLiked}>
+          {onFavorite && <div className={styles.favorite} onClick={onClickLiked}>
             <img src={isLiked ? '/img/liked.svg' : '/img/unliked.svg'} alt="unliked" />
-          </div>
+          </div>}
           <img width="100%" height={135} src={imgUrl} alt="sneakers" />
           <h5 className={styles.sl}>{title}</h5>
           <div className="d-flex justify-between align-center">
@@ -56,12 +56,12 @@ const Card = ({
               <span>Цена: </span>
               <b>{price} руб.</b>
             </div>
-            <img
+            {onPlus && <img
               className="cu-p"
               onClick={onCkickPlus}
               src={isItemAdded(id) ? '/img/checked.svg' : '/img/btn-plus.svg'}
               alt="plus"
-            />
+            />}
           </div>
         </>
       )}
