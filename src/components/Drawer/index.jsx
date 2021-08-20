@@ -1,13 +1,15 @@
 import React from 'react';
-import Info from '..//Card/Info';
-import axios from 'axios'
+import axios from 'axios';
 
-import s from './Drawer.module.scss'
-import {useCart} from '../Hooks/useCart.js';
+import Info from '..//Card/Info';
+import { useCart } from '../Hooks/useCart.js';
+
+import s from './Drawer.module.scss';
+
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const Drawer = ({ onClose, onRemove, items = [] }) => {
+const Drawer = ({ onClose, onRemove, items = [], opened }) => {
 	//вытаскиваем корзину из кастомного хука 
 	const { cartDrawer, setCartDrawer, totalPrice } = useCart();
 	//содаю стейт для получения айди заказ
@@ -49,7 +51,7 @@ const Drawer = ({ onClose, onRemove, items = [] }) => {
 	}
 
 	return (
-		<div className={s.overlay}>
+		<div className={`${s.overlay} ${opened ? s.overlayVisible : ''}`}>
         <div className={s.drawer}>
          <h2 className="mb-40 d-flex justify-between">
             Корзина
