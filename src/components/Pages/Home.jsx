@@ -22,7 +22,7 @@ const Home = ({
 				{...item}
 				onFavorite={(obj) => onAddToFavorite(obj)}
 				onPlus={(obj) => onAddedCart(obj)}
-				favorited={favorite.some(obj => Number(obj.id) === Number(id))}
+				// favorited={favorite.some(obj => Number(obj.id) === Number(id))}
 				loading={isLoading}
 			/>
 		))

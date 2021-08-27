@@ -18,13 +18,14 @@ const Card = ({
  	
 	const {isItemAdded} = React.useContext(AppContext)
   const [isLiked, setIsLaked] = React.useState(favorited);
+	const obj = { id, parentId: id, title, price, imgUrl };
 
   const onCkickPlus = () => {
-    onPlus({ id, title, price, imgUrl });
+    onPlus(obj);
   };
 
   const onClickLiked = () => {
-    onFavorite({ id, title, price, imgUrl });
+    onFavorite(obj);
     setIsLaked(!isLiked);
   };
 
