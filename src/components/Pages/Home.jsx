@@ -5,7 +5,7 @@ import Search from '../Search';
 
 const Home = ({
 	searchInputValue,
-	favorite,
+	// favorite,
 	items,
 	setsearchInputValue,
 	onAddedCart,
