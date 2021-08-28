@@ -1,1 +1,1 @@
-# sneakers-shop
+# https://gowagowa-cha.github.io/sneakers-shop/
