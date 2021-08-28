@@ -68,8 +68,8 @@ const Drawer = ({ onClose, onRemove, items = [], opened }) => {
 								 		className="mr-20"
 								 		width={70}
 										height={70}
-								 		// src={el.imgUrl}
-										 style={{backgroundImage: `url(${el.imgUrl})`}}
+								 		src={el.imgUrl}
+										//  style={{backgroundImage: `url(${el.imgUrl})`}}
 									 	alt="sneakers"
 								 	/>
 					  				<div className="mr-15">
